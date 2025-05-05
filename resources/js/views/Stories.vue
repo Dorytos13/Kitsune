@@ -1,4 +1,4 @@
-<!-- filepath: c:\Users\dodir\Documents\DevProdMed\WebMobUI52-kitsune\resources\js\views\Stories.vue -->
+<!-- filepath: c:\Users\dodir\Documents\DevProdMed\KITSUNE\Kitsune\resources\js\views\Stories.vue -->
 <script setup>
 import { useFetchJson } from '@/composables/useFetchJson'
 import { useRouter } from 'vue-router'
@@ -13,17 +13,16 @@ function openStory(story) {
   router.push(`/story/${story.id}`)
 }
 
-function navigateToLogin() {
-  router.push('/login')
+function startReading() {
+  // Trouve la première histoire disponible
+  const firstPlayable = stories.value?.find(story => story.playable)
+  if (firstPlayable) {
+    router.push(`/story/${firstPlayable.id}`)
+  }
 }
 
-function navigateToGameInfo() {
+function showInfo() {
   router.push('/game-info')
-}
-
-async function handleLogout() {
-  await logout()
-  router.push('/')
 }
 </script>
 
@@ -92,10 +91,7 @@ async function handleLogout() {
         </div>
       </div>
     </div>
-    
-    <!-- Nuages décoratifs -->
-    <div class="cloud-decoration cloud-1"></div>
-    <div class="cloud-decoration cloud-2"></div>
+
   </div>
 </template>
 
@@ -110,100 +106,49 @@ async function handleLogout() {
   overflow: hidden;
   position: relative;
   padding: 0 5%;
-  background: linear-gradient(135deg, #fff5f5 0%, #ffd1d1 100%);
-}
+  background: linear-gradient(135deg, #fff5f5 0%, #ffd1d1 100%);  }
 
 .content {
   width: 45%;
   z-index: 10;
-  padding-right: 2rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-right: var(--space-lg);
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-lg);
 }
 
 .welcome-text {
   font-size: 1.2rem;
   font-weight: 400;
   letter-spacing: 3px;
-  color: #b5555a;
-  margin-bottom: 0.5rem;
-  font-family: 'Noto Sans', sans-serif;
+  color: var(--text-dark);
+  margin-bottom: var(--space-xs);
+  font-family: var(--font-main);
 }
 
 .japan-title {
   font-size: 4rem;
   font-weight: 700;
-  color: #7c3046;
+  color: var(--secondary-dark);
   margin-top: 0;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-lg);
   letter-spacing: 2px;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-display);
 }
 
 .japan-description {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #66464c;
-  margin-bottom: 2rem;
+  color: var(--text-dark);
+  margin-bottom: var(--space-xl);
   max-width: 500px;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--font-jp);
 }
 
 .user-actions {
   display: flex;
-  gap: 1rem;
+  gap: var(--space-md);
   flex-wrap: wrap;
-  margin-top: 2rem;
-}
-
-.read-more-btn, .info-btn, .logout-btn {
-  display: inline-block;
-  padding: 0.8rem 2rem;
-  border-radius: 30px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  border: none;
-  cursor: pointer;
-  font-family: 'Noto Sans', sans-serif;
-}
-
-.read-more-btn {
-  background-color: #7c3046;
-  color: white;
-  box-shadow: 0 4px 15px rgba(124, 48, 70, 0.3);
-}
-
-.read-more-btn:hover {
-  background-color: #8e3751;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(124, 48, 70, 0.4);
-}
-
-.info-btn {
-  background-color: rgba(124, 48, 70, 0.1);
-  color: #7c3046;
-  border: 1px solid rgba(124, 48, 70, 0.3);
-}
-
-.info-btn:hover {
-  background-color: rgba(124, 48, 70, 0.15);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 15px rgba(124, 48, 70, 0.1);
-}
-
-.logout-btn {
-  background-color: transparent;
-  border: 1px solid #7c3046;
-  color: #7c3046;
-}
-
-.logout-btn:hover {
-  background-color: rgba(124, 48, 70, 0.05);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 15px rgba(124, 48, 70, 0.1);
+  margin-top: var(--space-lg);
 }
 
 .torii-illustration {
@@ -215,41 +160,17 @@ async function handleLogout() {
   justify-content: center;
 }
 
-/* Nuages stylisés */
-.cloud-decoration {
-  position: absolute;
-  background: radial-gradient(#ffffff, transparent 70%);
-  border-radius: 50%;
-  z-index: 1;
-}
-
-.cloud-1 {
-  top: 15%;
-  left: 60%;
-  width: 250px;
-  height: 100px;
-  opacity: 0.6;
-}
-
-.cloud-2 {
-  top: 25%;
-  left: 75%;
-  width: 150px;
-  height: 70px;
-  opacity: 0.4;
-}
-
 /* Conteneur pour le scroll des histoires */
 .stories-scroll {
   width: 100%;
   height: 75%;
   overflow-y: auto;
-  padding: 2rem;
+  padding: var(--space-lg);
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: var(--space-lg);
   scrollbar-width: thin;
-  scrollbar-color: #7c3046 rgba(124, 48, 70, 0.1);
+  scrollbar-color: var(--primary) rgba(124, 48, 70, 0.1);
   max-height: 80vh;
 }
 
@@ -259,28 +180,25 @@ async function handleLogout() {
 
 .stories-scroll::-webkit-scrollbar-track {
   background: rgba(124, 48, 70, 0.1);
-  border-radius: 10px;
+  border-radius: var(--radius-lg);
 }
 
 .stories-scroll::-webkit-scrollbar-thumb {
-  background-color: #7c3046;
-  border-radius: 10px;
+  background-color: var(--primary);
+  border-radius: var(--radius-lg);
 }
 
 .story-card {
-  background-color: white;
-  border-radius: 12px;
+  display: flex;
+  background-color: var(--bg-light);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(124, 48, 70, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px var(--shadow);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
   cursor: pointer;
   position: relative;
   animation: fadeIn 0.5s ease forwards;
   opacity: 0;
-  transform: translateY(20px);
-  display: flex;
-  border: 1px solid rgba(124, 48, 70, 0.05);
-  min-height: 200px;
 }
 
 @keyframes fadeIn {
@@ -292,7 +210,7 @@ async function handleLogout() {
 
 .story-card:hover:not(.inactive) {
   transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(124, 48, 70, 0.15);
+  box-shadow: 0 15px 30px var(--shadow);
 }
 
 .story-card.inactive {
@@ -303,24 +221,24 @@ async function handleLogout() {
 
 .story-tag {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: var(--space-md);
+  right: var(--space-md);
   padding: 0.3rem 0.8rem;
-  background-color: #7c3046;
-  color: white;
+  background-color: var(--secondary-dark);
+  color: var(--text-light);
   font-size: 0.8rem;
   font-weight: 600;
-  border-radius: 20px;
+  border-radius: var(--radius-md);
   z-index: 2;
-  box-shadow: 0 2px 8px rgba(124, 48, 70, 0.3);
-  font-family: 'Noto Sans', sans-serif;
+  box-shadow: 0 2px 8px var(--shadow);
+  font-family: var(--font-main);
 }
 
 .story-cover {
   width: 35%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform var(--transition-slow);
 }
 
 .story-card:hover:not(.inactive) .story-cover {
@@ -328,7 +246,7 @@ async function handleLogout() {
 }
 
 .story-content {
-  padding: 1.5rem;
+  padding: var(--space-lg);
   width: 65%;
   display: flex;
   flex-direction: column;
@@ -337,9 +255,9 @@ async function handleLogout() {
 
 .story-title {
   font-size: 1.4rem;
-  margin-bottom: 1rem;
-  color: #66464c;
-  font-family: 'Playfair Display', serif;
+  margin-bottom: var(--space-md);
+  color: var(--text-dark);
+  font-family: var(--font-display);
   position: relative;
   font-weight: 600;
 }
@@ -351,8 +269,8 @@ async function handleLogout() {
   left: 0;
   width: 30px;
   height: 2px;
-  background-color: #7c3046;
-  transition: width 0.3s ease;
+  background-color: var(--primary);
+  transition: width var(--transition-normal);
 }
 
 .story-card:hover:not(.inactive) .story-title::after {
@@ -360,7 +278,7 @@ async function handleLogout() {
 }
 
 .story-summary {
-  color: #66464c;
+  color: var(--text-dark);
   font-size: 0.95rem;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -368,16 +286,16 @@ async function handleLogout() {
   -webkit-box-orient: vertical;
   overflow: hidden;
   line-height: 1.5;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--font-jp);
 }
 
 .soon {
   font-style: italic;
-  color: #b5555a;
+  color: var(--primary);
   font-size: 0.9rem;
   position: relative;
   padding-left: 1.5rem;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--font-jp);
 }
 
 .soon::before {
@@ -394,7 +312,7 @@ async function handleLogout() {
   justify-content: center;
   width: 100%;
   height: 100%;
-  gap: 1.5rem;
+  gap: var(--space-lg);
 }
 
 .loading-spinner {
@@ -402,7 +320,7 @@ async function handleLogout() {
   height: 50px;
   border-radius: 50%;
   border: 3px solid rgba(124, 48, 70, 0.2);
-  border-top-color: #7c3046;
+  border-top-color: var(--primary);
   animation: spin 1s infinite linear;
 }
 
@@ -411,28 +329,28 @@ async function handleLogout() {
 }
 
 .loading-container p {
-  color: #66464c;
-  font-family: 'Noto Sans', sans-serif;
+  color: var(--text-dark);
+  font-family: var(--font-main);
   font-size: 1.1rem;
 }
 
 .error-container {
   text-align: center;
   font-size: 1.1rem;
-  color: #b00020;
-  padding: 2rem;
-  background-color: rgba(176, 0, 32, 0.05);
-  border-radius: 8px;
-  border-left: 4px solid #b00020;
+  color: var(--error);
+  padding: var(--space-lg);
+  background-color: var(--error-light);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--error);
   width: 80%;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: var(--font-main);
 }
 
 /* Responsive design */
 @media (max-width: 992px) {
   .japan-container {
     flex-direction: column;
-    padding-top: 2rem;
+    padding-top: var(--space-xl);
     height: auto;
     min-height: 100vh;
   }
@@ -442,7 +360,7 @@ async function handleLogout() {
     text-align: center;
     padding-right: 0;
     order: 1;
-    margin-bottom: 2rem;
+    margin-bottom: var(--space-lg);
   }
   
   .torii-illustration {
@@ -454,7 +372,7 @@ async function handleLogout() {
   
   .stories-scroll {
     max-height: 60vh;
-    padding: 1rem;
+    padding: var(--space-md);
   }
   
   .story-card {
@@ -481,10 +399,6 @@ async function handleLogout() {
   .user-actions {
     justify-content: center;
   }
-  
-  .cloud-1, .cloud-2 {
-    display: none;
-  }
 }
 
 @media (max-width: 576px) {
@@ -500,55 +414,24 @@ async function handleLogout() {
     flex-direction: column;
     width: 100%;
   }
-  
-  .read-more-btn, .info-btn, .logout-btn {
-    width: 100%;
-  }
 }
 
 /* Version sombre */
 @media (prefers-color-scheme: dark) {
-  .japan-container {
-    background: linear-gradient(135deg, #2a1a1d 0%, #3a2a30 100%);
+  /* La plupart des styles sont maintenant gérés par les variables CSS */
+  .story-title::after {
+    background-color: var(--primary);
   }
   
-  .story-card {
-    background-color: #3a2a30;
-  }
-  
-  .japan-title {
-    color: #ff8a8a;
-  }
-  
-  .welcome-text {
-    color: #ff8a8a;
-  }
-  
-  .japan-description, .story-title, .story-summary {
-    color: #ffd1d1;
-  }
-  
-  .logout-btn {
-    border-color: #ff8a8a;
-    color: #ff8a8a;
+  /* Cas spécifiques non couverts par les variables */
+  .loading-spinner {
+    border-color: rgba(255, 138, 138, 0.2);
+    border-top-color: var(--primary);
   }
   
   .info-btn {
     background-color: rgba(255, 138, 138, 0.1);
-    color: #ff8a8a;
     border-color: rgba(255, 138, 138, 0.3);
-  }
-  
-  .loading-container p {
-    color: #ffd1d1;
-  }
-  
-  .story-title::after {
-    background-color: #ff8a8a;
-  }
-  
-  .soon {
-    color: #ff8a8a;
   }
 }
 </style>

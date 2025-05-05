@@ -1,0 +1,71 @@
+:root {
+    /* Color palette */
+    /* Couleurs de base */
+    --primary: #e25822;  /* Orange Kitsune */
+    --primary-light: #ff7e47;
+    --primary-dark: #b34218;
+    
+    --secondary: #8e354a; /* Rouge japonais traditionnel */
+    --secondary-dark: #7c3046;
+    --secondary-light: #a6465d;
+    
+    --accent: #f8c3cd; /* Rose sakura */
+    
+    /* Arrière-plans */
+    --bg-light: #fff5f5;
+    --bg-light-gradient-end: #ffd1d1;
+    --bg-dark: #2a1a1d;
+    --bg-dark-gradient-end: #3a2a30;
+    
+    /* Textes */
+    --text-dark: #66464c;
+    --text-light: #ffffff;
+    --text-muted: #6c757d;
+    
+    /* UI elements */
+    --border: #d6d6d6;
+    --border-dark: #3d3d3d;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --shadow-dark: rgba(0, 0, 0, 0.3);
+    
+    /* Feedback */
+    --error: #b00020;
+    --error-light: rgba(176, 0, 32, 0.1);
+    --success: #4CAF50;
+    
+    /* Typography */
+    --font-main: 'Noto Sans JP', 'Noto Sans', sans-serif;
+    --font-display: 'Playfair Display', serif;
+    --font-jp: 'Noto Serif JP', serif;
+    
+    /* Spacing */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2.5rem;
+    --space-xxl: 4rem;
+    
+    /* Border radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 20px;
+    
+    /* Animations */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+  }
+  
+  /* Dark mode variables */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --primary: #ff8a8a;
+      --primary-hover: #ffacac;
+      --bg-light: var(--bg-dark);
+      --text-dark: var(--text-light);
+      --border: var(--border-dark);
+      --shadow: var(--shadow-dark);
+    }
+  }

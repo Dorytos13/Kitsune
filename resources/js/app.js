@@ -3,6 +3,7 @@ import { setDefaultHeaders, setDefaultBaseUrl } from '@/utils/fetchJson.js';
 import BaseButton from './components/ui/BaseButton.vue';
 import App from './App.vue';
 import router from './router';
+import '../css/variables.css'
 import '../css/custom-theme.css'
 
 setDefaultBaseUrl('http://127.0.0.1:8000/api')

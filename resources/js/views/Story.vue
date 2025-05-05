@@ -1,142 +1,29 @@
 <script setup>
-import { ref,watch, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useFetchJson } from '@/composables/useFetchJson'
 import { useAuth } from '@/composables/Auth.js'
+import { useChapter } from '@/composables/useChapter.js'
 
 const route = useRoute()
 const router = useRouter()
 const storyId = route.params.id
 
-// Clé pour le stockage local
-const STORAGE_KEY = `story_${storyId}_progress`;
-
 const { isAuthenticated } = useAuth()
 const { data: story, error, loading } = useFetchJson(`/stories/${storyId}`)
 
-// Gestion des chapitres et des choix
-const currentChapter = ref(null)
-const chapterHistory = ref([])
-
-// Charger l'historique depuis le stockage local
-function loadProgress() {
-  try {
-    const savedProgress = localStorage.getItem(STORAGE_KEY);
-    if (savedProgress) {
-      return JSON.parse(savedProgress);
-    }
-  } catch (e) {
-    console.error('Erreur lors du chargement de la progression:', e);
-  }
-  return null;
-}
-
-// Sauvegarder l'historique dans le stockage local
-function saveProgress() {
-  try {
-    const progress = {
-      currentChapterId: currentChapter.value?.id,
-      history: chapterHistory.value
-    };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-  } catch (e) {
-    console.error('Erreur lors de la sauvegarde de la progression:', e);
-  }
-}
-
-// Démarrer l'histoire avec le premier chapitre quand les données sont chargées
-onMounted(() => {
-  const unwatch = watch(story, (newStory) => {
-    if (newStory && newStory.chapters && newStory.chapters.length > 0) {
-      // Récupérer la progression sauvegardée
-      const savedProgress = loadProgress();
-      let targetChapter;
-      
-      if (savedProgress && savedProgress.currentChapterId) {
-        targetChapter = newStory.chapters.find(c => c.id === savedProgress.currentChapterId);
-        
-        // Restaurer également l'historique si disponible
-        if (savedProgress.history && Array.isArray(savedProgress.history)) {
-          chapterHistory.value = savedProgress.history;
-        }
-      }
-      
-      // Fallback au premier chapitre si nécessaire
-      if (!targetChapter) {
-        targetChapter = newStory.chapters.find(c => c.chapter_number === 1);
-        chapterHistory.value = [];
-      }
-      
-      if (targetChapter) {
-        currentChapter.value = targetChapter;
-        
-        // Si l'historique est vide, ajouter le chapitre actuel
-        if (chapterHistory.value.length === 0) {
-          chapterHistory.value.push(targetChapter.id);
-        }
-      }
-      
-      unwatch();
-    }
-  }, { immediate: true });
-});
-
-// Fonction pour définir le chapitre courant
-function setCurrentChapter(chapter) {
-  currentChapter.value = chapter
-  chapterHistory.value.push(chapter.id)
-  saveProgress()
-}
-
-// Faire un choix et passer au chapitre suivant
-function makeChoice(choice) {
-  const nextChapterId = choice.next_chapter_id
-  const nextChapter = story.value.chapters.find(chapter => chapter.id === nextChapterId)
-  
-  if (nextChapter) {
-    setCurrentChapter(nextChapter)
-    // Défiler vers le haut pour que l'utilisateur puisse voir le nouveau contenu
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-}
+// Utiliser le composable pour gérer les chapitres
+const { 
+  currentChapter,
+  makeChoice, 
+  restartStory, 
+  goToPreviousChapter,
+  isEndOfStory,
+  canGoBack 
+} = useChapter(story, storyId)
 
 // Retourner à l'écran des histoires
 function backToStories() {
   router.push('/stories')
-}
-
-// Recommencer l'histoire
-function restartStory() {
-  const firstChapter = story.value.chapters.find(c => c.chapter_number === 1);
-  if (firstChapter) {
-    chapterHistory.value = [firstChapter.id];
-    currentChapter.value = firstChapter;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    saveProgress();
-  }
-}
-
-// Vérifier si c'est la fin de l'histoire (pas de choix disponibles)
-const isEndOfStory = computed(() => {
-  return currentChapter.value && 
-         (!currentChapter.value.choices || currentChapter.value.choices.length === 0)
-})
-
-// Vérifier si on peut revenir en arrière
-const canGoBack = computed(() => chapterHistory.value.length > 1)
-
-function goToPreviousChapter() {
-  if (canGoBack.value) {
-    chapterHistory.value.pop();
-    const previousChapterId = chapterHistory.value[chapterHistory.value.length - 1];
-    const previousChapter = story.value.chapters.find(chapter => chapter.id === previousChapterId);
-    
-    if (previousChapter) {
-      currentChapter.value = previousChapter;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      saveProgress();
-    }
-  }
 }
 </script>
 

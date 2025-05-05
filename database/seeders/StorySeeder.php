@@ -30,6 +30,7 @@ class StorySeeder extends Seeder
                 'story_id' => $story->id,
                 'chapter_number' => $chapter['chapter_number'],
                 'content' => $chapter['content'],
+                'image' => $chapter['image'] ?? null,
             ]);
 
             $chapterIdMap[$chapter['chapter_number']] = $newChapter->id;

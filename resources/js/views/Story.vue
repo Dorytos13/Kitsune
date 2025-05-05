@@ -182,9 +182,14 @@ function goToPreviousChapter() {
         <!-- Image liée au chapitre si disponible -->
         <div class="chapter-image-container">
           <transition name="fade">
-            <img :src="story.cover" 
-                 :alt="story.title" 
-                 class="chapter-image" />
+            <img v-if="currentChapter.image" 
+                :src="currentChapter.image" 
+                :alt="`Illustration du chapitre ${currentChapter.chapter_number}`" 
+                class="chapter-image" />
+            <img v-else 
+                :src="story.cover" 
+                :alt="story.title" 
+                class="chapter-image" />
           </transition>
         </div>
         

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('story_id')->constrained()->onDelete('cascade');
             $table->integer('chapter_number');
             $table->text('content');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

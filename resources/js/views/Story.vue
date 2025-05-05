@@ -43,9 +43,9 @@ function backToStories() {
     <div v-else-if="error" class="error-container">
       <h2>Une erreur est survenue</h2>
       <p>{{ error }}</p>
-      <button @click="backToStories" class="btn-primary">
+      <BaseButton variant="outline" @click="backToStories">
         Retour aux histoires
-      </button>
+      </BaseButton>
     </div>
     
     <div v-else-if="story && currentChapter" class="story-content">
@@ -53,14 +53,17 @@ function backToStories() {
       <div class="story-header">
         <h1 class="story-title">{{ story.title }}</h1>
         <div class="navigation-actions">
-          <button v-if="canGoBack" 
-                  @click="goToPreviousChapter" 
-                  class="btn-outline">
+          <BaseButton 
+            v-if="canGoBack" 
+            variant="outline" 
+            @click="goToPreviousChapter">
             Chapitre précédent
-          </button>
-          <button @click="backToStories" class="btn-outline">
+          </BaseButton>
+          <BaseButton 
+            variant="outline" 
+            @click="backToStories">
             Retour aux histoires
-          </button>
+          </BaseButton>
         </div>
       </div>
       
@@ -89,12 +92,14 @@ function backToStories() {
                class="choices-container">
             <h2 class="choices-heading">Que décidez-vous ?</h2>
             <transition-group name="choice-appear" tag="div" class="choices-list">
-              <button v-for="choice in currentChapter.choices" 
-                      :key="choice.id"
-                      @click="makeChoice(choice)" 
-                      class="choice-button">
+              <BaseButton 
+                v-for="choice in currentChapter.choices" 
+                :key="choice.id"
+                @click="makeChoice(choice)" 
+                class="choice-button"
+                variant="secondary">
                 {{ choice.text }}
-              </button>
+              </BaseButton>
             </transition-group>
           </div>
           
@@ -103,12 +108,16 @@ function backToStories() {
             <p class="end-message">Fin de l'histoire</p>
             <p class="author-note">Histoire écrite par {{ story.author }}</p>
             <div class="end-actions">
-              <button @click="restartStory" class="btn-primary">
+              <BaseButton 
+                variant="primary" 
+                @click="restartStory">
                 Recommencer l'aventure
-              </button>
-              <button @click="backToStories" class="btn-outline">
+              </BaseButton>
+              <BaseButton 
+                variant="outline" 
+                @click="backToStories">
                 Découvrir d'autres histoires
-              </button>
+              </BaseButton>
             </div>
           </div>
         </div>
@@ -282,44 +291,6 @@ function backToStories() {
   gap: 1rem;
 }
 
-.choice-button {
-  padding: 1rem 1.5rem;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 1px solid #7c3046;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  color: #7c3046;
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Noto Sans', sans-serif;
-  position: relative;
-  overflow: hidden;
-}
-
-.choice-button::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background-color: rgba(124, 48, 70, 0.1);
-  transition: width 0.3s ease;
-  z-index: -1;
-}
-
-.choice-button:hover {
-  transform: translateX(8px);
-  background-color: rgba(255, 255, 255, 0.9);
-  border-color: #8e3751;
-  color: #8e3751;
-}
-
-.choice-button:hover::after {
-  width: 100%;
-}
-
 /* Fin de l'histoire */
 .story-end {
   margin-top: 2rem;
@@ -403,44 +374,6 @@ function backToStories() {
   font-family: 'Noto Sans', sans-serif;
 }
 
-/* Boutons */
-.btn-primary, .btn-outline {
-  display: inline-block;
-  padding: 0.8rem 2rem;
-  border-radius: 30px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  font-family: 'Noto Sans', sans-serif;
-}
-
-.btn-primary {
-  background-color: #7c3046;
-  color: white;
-  border: none;
-  box-shadow: 0 4px 15px rgba(124, 48, 70, 0.3);
-}
-
-.btn-primary:hover {
-  background-color: #8e3751;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(124, 48, 70, 0.4);
-}
-
-.btn-outline {
-  background-color: transparent;
-  color: #7c3046;
-  border: 1px solid #7c3046;
-}
-
-.btn-outline:hover {
-  background-color: rgba(124, 48, 70, 0.05);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 15px rgba(124, 48, 70, 0.1);
-}
-
 /* Animations */
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s;
@@ -494,10 +427,6 @@ function backToStories() {
     font-size: 1.1rem;
   }
   
-  .choice-button {
-    padding: 0.8rem 1.2rem;
-  }
-  
   .story-title {
     font-size: 1.8rem;
   }
@@ -528,18 +457,6 @@ function backToStories() {
   
   .chapter-text {
     color: #ffd1d1;
-  }
-  
-  .choice-button {
-    background-color: rgba(58, 42, 48, 0.8);
-    border-color: #ff8a8a;
-    color: #ff8a8a;
-  }
-  
-  .choice-button:hover {
-    background-color: rgba(58, 42, 48, 0.9);
-    border-color: #ff9d9d;
-    color: #ff9d9d;
   }
   
   .choices-heading {

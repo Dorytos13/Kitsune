@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import { setDefaultHeaders, setDefaultBaseUrl } from '@/utils/fetchJson.js';
+import BaseButton from './components/ui/BaseButton.vue';
 import App from './App.vue';
 import router from './router';
 import '../css/custom-theme.css'
@@ -17,3 +18,4 @@ setDefaultBaseUrl(urlApi);
 const myApp = createApp(App);
 myApp.use(router)
 myApp.mount('#app');
+myApp.component('BaseButton', BaseButton);

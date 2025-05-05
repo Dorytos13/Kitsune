@@ -6,9 +6,12 @@
       <p class="japan-description">
         Plongez dans l'univers magique des légendes japonaises, où les kitsune - renards mystiques aux pouvoirs surnaturels - vous guideront à travers des récits ancestraux dans un cadre visuel inspiré du Japon traditionnel.
       </p>
-      <router-link to="/stories" class="read-more-btn">
-        DÉCOUVRIR
-      </router-link>
+      <BaseButton 
+        variant="primary" 
+        @click="$router.push('/stories')"
+        class="read-more-btn">
+        Découvrir les histoires
+      </BaseButton>
     </div>
     
     <div class="torii-illustration">

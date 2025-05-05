@@ -39,14 +39,18 @@ async function handleLogout() {
       <div class="user-actions">
         <template v-if="isAuthenticated">
           <span class="username" v-if="user">{{ user.name }}</span>
-          <button class="btn-outline" @click="handleLogout">
+          <BaseButton 
+            variant="outline"
+            @click="handleLogout">
             Déconnexion
-          </button>
+          </BaseButton>
         </template>
         <template v-else>
-          <router-link to="/login" class="btn-primary">
+          <BaseButton 
+            variant="primary"
+            @click="router.push('/login')">
             Connexion
-          </router-link>
+          </BaseButton>
         </template>
       </div>
     </div>

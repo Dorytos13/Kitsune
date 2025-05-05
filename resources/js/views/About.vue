@@ -78,9 +78,12 @@ onMounted(async () => {
         </ul>
       </div>
       
-      <button class="back-button" @click="router.push('/stories')">
+      <BaseButton 
+        variant="primary" 
+        @click="router.push('/stories')"
+        class="back-button">
         Retour aux histoires
-      </button>
+      </BaseButton>
     </div>
   </div>
 </template>
@@ -153,23 +156,6 @@ onMounted(async () => {
   padding: 1rem;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-}
-
-.back-button {
-  background: #bc6ff1;
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1.1rem;
-  display: block;
-  margin: 2rem auto 0;
-  transition: background-color 0.2s;
-}
-
-.back-button:hover {
-  background: #9e4ed8;
 }
 
 @media (max-width: 768px) {

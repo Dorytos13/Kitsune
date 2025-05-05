@@ -40,16 +40,25 @@ async function handleLogout() {
       
       <div class="user-actions">
         <template v-if="isAuthenticated">
-          <button class="info-btn" @click="navigateToGameInfo">
-            ℹ️ Informations sur le jeu
-          </button>
-          <button class="logout-btn" @click="handleLogout">
-            Déconnexion
-          </button>
+          <BaseButton 
+            variant="secondary" 
+            @click="showInfo"
+            class="info-btn">
+            En savoir plus sur le jeu
+          </BaseButton>
+          <BaseButton 
+            variant="outline" 
+            @click="logout"
+            class="logout-btn">
+            Deconnexion
+          </BaseButton>
         </template>
-        <button v-else class="read-more-btn" @click="navigateToLogin">
-          Connexion
-        </button>
+        <BaseButton 
+          variant="primary" 
+          @click="startReading"
+          class="read-more-btn">
+          Commencer la lecture
+        </BaseButton>
       </div>
     </div>
     

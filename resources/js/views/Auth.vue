@@ -101,20 +101,23 @@ const handleSubmit = async () => {
           />
         </div>
         
-        <button 
-          type="submit" 
-          class="submit-button" 
-          :disabled="loading"
-        >
-          {{ loading ? 'Chargement...' : (mode === 'login' ? 'Se connecter' : 'S\'inscrire') }}
-        </button>
+        <BaseButton 
+          type="submit"
+          variant="primary"
+          :loading="loading"
+          class="submit-button">
+          {{ mode === 'login' ? 'Se connecter' : 'S\'inscrire' }}
+        </BaseButton>
       </form>
       
       <div class="toggle-mode">
         {{ mode === 'login' ? 'Pas encore de compte ?' : 'Déjà un compte ?' }}
-        <button class="toggle-button" @click="toggleMode">
+        <BaseButton 
+          variant="secondary" 
+          @click="toggleMode"
+          class="toggle-button">
           {{ mode === 'login' ? 'S\'inscrire' : 'Se connecter' }}
-        </button>
+        </BaseButton>
       </div>
     </div>
   </div>
@@ -236,57 +239,12 @@ const handleSubmit = async () => {
   box-shadow: 0 0 0 3px rgba(124, 48, 70, 0.1);
 }
 
-.submit-button {
-  width: 100%;
-  padding: 0.9rem;
-  font-size: 1rem;
-  font-weight: 600;
-  background-color: #7c3046;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Noto Sans', sans-serif;
-}
-
-.submit-button:hover {
-  background-color: #8e3751;
-  transform: translateY(-3px);
-  box-shadow: 0 4px 15px rgba(124, 48, 70, 0.3);
-}
-
-.submit-button:disabled {
-  background-color: #d6d6d6;
-  color: #8e8e8e;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
 .toggle-mode {
   text-align: center;
   font-size: 0.9rem;
   color: #66464c;
   margin-top: 1.5rem;
   font-family: 'Noto Sans', sans-serif;
-}
-
-.toggle-button {
-  background: none;
-  border: none;
-  color: #7c3046;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0.25rem;
-  margin-left: 0.25rem;
-  transition: all 0.3s ease;
-  font-family: 'Noto Sans', sans-serif;
-}
-
-.toggle-button:hover {
-  color: #8e3751;
-  text-decoration: underline;
 }
 
 /* Décoration Kitsune */
@@ -345,16 +303,5 @@ const handleSubmit = async () => {
     color: #ffd1d1;
   }
   
-  .toggle-button {
-    color: #ff8a8a;
-  }
-  
-  .submit-button {
-    background-color: #7c3046;
-  }
-  
-  .submit-button:hover {
-    background-color: #8e3751;
-  }
 }
 </style>

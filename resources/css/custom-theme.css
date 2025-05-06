@@ -299,6 +299,26 @@ h1, h2, h3, h4, h5, h6 {
     animation: fadeIn 0.5s ease forwards;
     opacity: 0;
   }
+
+  .chapter-image-container {
+    width: 100%;
+    max-height: 350px;
+    overflow: hidden;
+    margin-bottom: var(--space-md);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chapter-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .chapter-image:hover {
+    transform: scale(1.02);
+  }
   
   @keyframes fadeIn {
     from {

@@ -69,18 +69,9 @@ function backToStories() {
       
       <!-- Contenu principal de l'histoire -->
       <div class="chapter-container">
-        <!-- Image liée au chapitre si disponible -->
-        <div class="chapter-image-container">
-          <transition name="fade">
-            <img v-if="currentChapter.image" 
-                :src="currentChapter.image" 
-                :alt="`Illustration du chapitre ${currentChapter.chapter_number}`" 
-                class="chapter-image" />
-            <img v-else 
-                :src="story.cover" 
-                :alt="story.title" 
-                class="chapter-image" />
-          </transition>
+        <!-- Image du chapitre -->
+        <div v-if="currentChapter.image" class="chapter-image-container">
+          <img :src="currentChapter.image" :alt="'Illustration du chapitre ' + chapter.chapter_number" class="chapter-image">
         </div>
         
         <div class="chapter-content">

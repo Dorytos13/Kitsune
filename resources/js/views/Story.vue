@@ -25,6 +25,11 @@ const {
 function backToStories() {
   router.push('/stories')
 }
+
+// Gérer les erreurs de chargement d'image
+function handleImageError(event) {
+  console.error(`Erreur de chargement de l'image: ${event.target.src}`);
+}
 </script>
 
 <template>
@@ -69,9 +74,15 @@ function backToStories() {
       
       <!-- Contenu principal de l'histoire -->
       <div class="chapter-container">
-        <!-- Image du chapitre -->
-        <div v-if="currentChapter.image" class="chapter-image-container">
-          <img :src="currentChapter.image" :alt="'Illustration du chapitre ' + chapter.chapter_number" class="chapter-image">
+        <!-- Image liée au chapitre si disponible -->
+        <div class="chapter-image-container">
+          <transition name="fade">
+            <img v-if="currentChapter.image" 
+                :src="currentChapter.image" 
+                :alt="`Illustration du chapitre ${currentChapter.chapter_number}`" 
+                class="chapter-image"
+                @error="handleImageError" />
+          </transition>
         </div>
         
         <div class="chapter-content">

@@ -7,6 +7,7 @@ import { useAuth } from '@/composables/Auth.js'
 const { data: stories, error, loading } = useFetchJson('/stories')
 const router = useRouter()
 const { isAuthenticated, user, logout } = useAuth()
+defineProps(['story']);
 
 function openStory(story) {
   if (!story.playable) return
@@ -14,15 +15,11 @@ function openStory(story) {
 }
 
 function startReading() {
-  // Trouve la première histoire disponible
-  const firstPlayable = stories.value?.find(story => story.playable)
-  if (firstPlayable) {
-    router.push(`/story/${firstPlayable.id}`)
-  }
+  router.push(`/stories/${story.id}`);
 }
 
 function showInfo() {
-  router.push('/game-info')
+  router.push('/about')
 }
 </script>
 
@@ -40,7 +37,7 @@ function showInfo() {
       <div class="user-actions">
         <template v-if="isAuthenticated">
           <BaseButton 
-            variant="secondary" 
+            variant="primary" 
             @click="showInfo"
             class="info-btn">
             En savoir plus sur le jeu
@@ -52,12 +49,6 @@ function showInfo() {
             Deconnexion
           </BaseButton>
         </template>
-        <BaseButton 
-          variant="primary" 
-          @click="startReading"
-          class="read-more-btn">
-          Commencer la lecture
-        </BaseButton>
       </div>
     </div>
     
@@ -87,6 +78,12 @@ function showInfo() {
             <h2 class="story-title">{{ story.title }}</h2>
             <p v-if="story.playable" class="story-summary">{{ story.summary }}</p>
             <p v-else class="soon">En cours d'écriture...</p>
+            <BaseButton 
+              variant="primary" 
+              @click="startReading" 
+              class="start-button">
+              Commencer la lecture
+            </BaseButton>
           </div>
         </div>
       </div>
@@ -236,7 +233,7 @@ function showInfo() {
 
 .story-cover {
   width: 35%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   transition: transform var(--transition-slow);
 }
@@ -298,13 +295,6 @@ function showInfo() {
   font-family: var(--font-jp);
 }
 
-.soon::before {
-  content: '🦊';
-  position: absolute;
-  left: 0;
-  opacity: 0.7;
-}
-
 .loading-container {
   display: flex;
   flex-direction: column;
@@ -322,6 +312,10 @@ function showInfo() {
   border: 3px solid rgba(124, 48, 70, 0.2);
   border-top-color: var(--primary);
   animation: spin 1s infinite linear;
+}
+
+.start-button {
+  margin-top: var(--space-md);
 }
 
 @keyframes spin {

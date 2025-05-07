@@ -2,36 +2,24 @@
   "title": "Le Photographe et le Kitsune de Shirakawa-go",
   "summary": "Un photographe freelance découvre un mystère spirituel dans un village enneigé du Japon, où la légende d'un kitsune, un renard mystique à neuf queues, pourrait transformer sa vie à jamais.",
   "author": "Doriane",
-  "cover": "/images/covers/kitsune.jpg",
+  "cover": "/images/covers/kitsune.png",
   "chapters": [
     {
       "chapter_number": 1,
       "content": "La neige tombe doucement sur votre objectif tandis que vous contemplez les maisons traditionnelles gasshō-zukuri de Shirakawa-go... En observant tes photos prises, une lueur orangée apparaît sur l’une d'elle, prise à la lisière des bois. Une vieille dame t’aborde :« Vous avez vu le kitsune, n’est-ce pas ? »",
       "image": "/images/chapters/chapitre1.png",
       "choices": [
-        {
-          "text": "Demander ce qu’est le kitsune",
-          "next_chapter": 2
-        },
-        {
-          "text": "Sourire poliment et continuer votre chemin",
-          "next_chapter": 3
-        }
+        { "text": "Demander ce qu’est le kitsune", "next_chapter": 2 },
+        { "text": "Sourire poliment et continuer votre chemin", "next_chapter": 3 }
       ]
     },
     {
       "chapter_number": 2,
-      "content": "« Le kitsune veille sur ce village depuis des siècles », dit-elle. Un renard à neuf queues. Un gardien. Un juge. Elle t’invite à prendre le thé pour en parler davantage.",
+      "content": "« Le kitsune veille sur ce village depuis des siècles », dit-elle. Un renard à neuf queues. Un gardien. Elle t’invite à prendre le thé pour en parler davantage.",
       "image": "/images/chapters/chapitre2.png",
       "choices": [
-        {
-          "text": "Accepter son invitation",
-          "next_chapter": 4
-        },
-        {
-          "text": "Décliner poliment pour continuer vos prises de vue",
-          "next_chapter": 5
-        }
+        { "text": "Accepter son invitation", "next_chapter": 4 },
+        { "text": "Décliner poliment pour continuer vos prises de vue", "next_chapter": 5 }
       ]
     },
     {
@@ -39,29 +27,17 @@
       "content": "Tu quittes le village, appareil en main. Mais une forme floue glisse entre les arbres. Tu sens... qu’on t’observe.",
       "image": "/images/chapters/chapitre3.png",
       "choices": [
-        {
-          "text": "Revenir sur tes pas",
-          "next_chapter": 2
-        },
-        {
-          "text": "Poursuivre vers la forêt",
-          "next_chapter": 6
-        }
+        { "text": "Revenir sur tes pas", "next_chapter": 14 },
+        { "text": "Poursuivre vers la forêt", "next_chapter": 6 }
       ]
     },
     {
       "chapter_number": 4,
-      "content": "Chez Mme Tanaka, un carnet jauni évoque un sanctuaire caché dans les bois. « Ceux qu’il choisit voient leur vie changer à jamais. »",
+      "content": "Chez Mme Tanaka, un carnet jauni évoque un sanctuaire caché dans les bois. « Ceux qu’il choisit voient leur vie changer à jamais. On dit que les rares sélectionnés voient parfois une femme aux yeux d’or. Elle peut avoir une apparence tout à fait humaine, tout à fait renarde ou un mélange des deux. »",
       "image": "/images/chapters/chapitre4.png",
       "choices": [
-        {
-          "text": "Partir à la recherche du sanctuaire",
-          "next_chapter": 6
-        },
-        {
-          "text": "Revenir à votre travail de photographe",
-          "next_chapter": 5
-        }
+        { "text": "Partir à la recherche du sanctuaire", "next_chapter": 6 },
+        { "text": "Revenir à votre travail de photographe", "next_chapter": 5 }
       ]
     },
     {
@@ -69,29 +45,17 @@
       "content": "Tes photos sont... étranges. Une silhouette floue, des yeux brillants, un reflet qui n’était pas là.",
       "image": "/images/chapters/chapitre5.png",
       "choices": [
-        {
-          "text": "Examiner vos photos en détail",
-          "next_chapter": 7
-        },
-        {
-          "text": "Aller demander conseil au chef du village",
-          "next_chapter": 8
-        }
+        { "text": "Examiner vos photos en détail", "next_chapter": 7 },
+        { "text": "Aller demander conseil au chef du village", "next_chapter": 8 }
       ]
     },
     {
       "chapter_number": 6,
-      "content": "Tu découvres un sanctuaire perdu, enfoncé dans la neige et le silence. Quelque chose t’y attend.",
+      "content": "Tu découvres un sanctuaire perdu, enfoncé dans la neige et le silence. Des talismans anciens pendent, figés par le givre. Un murmure se glisse entre les troncs. Tu ressens une présence... mais tu ignores encore son visage.",
       "image": "/images/chapters/chapitre6.png",
       "choices": [
-        {
-          "text": "Entrer dans le sanctuaire",
-          "next_chapter": 9
-        },
-        {
-          "text": "Rester à distance et prendre une photo",
-          "next_chapter": 7
-        }
+        { "text": "Entrer dans le sanctuaire", "next_chapter": 9 },
+        { "text": "Rester à distance et prendre une photo", "next_chapter": 7 }
       ]
     },
     {
@@ -99,44 +63,26 @@
       "content": "Dans un cliché, une femme aux yeux dorés. Tu ne te souviens pas l’avoir prise. Elle te fixe. Et elle sourit.",
       "image": "/images/chapters/chapitre7.png",
       "choices": [
-        {
-          "text": "Chercher cette femme dans le village",
-          "next_chapter": 8
-        },
-        {
-          "text": "Retourner au sanctuaire",
-          "next_chapter": 9
-        }
+        { "text": "Chercher cette femme dans le village", "next_chapter": 8 },
+        { "text": "Examiner les autres photos pour en apprendre plus", "next_chapter": 5 }
       ]
     },
     {
       "chapter_number": 8,
-      "content": "Le chef du village soupire. « Le kitsune vous a vu. Vous faites désormais partie de son histoire. »",
+      "content": "Tu trouves le chef du village, il annalyse et te dit « Le kitsune vous a vu. Vous faites désormais partie de son histoire. »",
       "image": "/images/chapters/chapitre8.png",
       "choices": [
-        {
-          "text": "Accepter votre lien avec l’esprit",
-          "next_chapter": 9
-        },
-        {
-          "text": "Tenter de fuir Shirakawa-go",
-          "next_chapter": 10
-        }
+        { "text": "Accepter votre lien avec l’esprit et retourner au temple", "next_chapter": 9 },
+        { "text": "Tenter de fuir Shirakawa-go", "next_chapter": 10 }
       ]
     },
     {
       "chapter_number": 9,
-      "content": "La femme aux yeux dorés apparait au sanctuaire. Elle tend un miroir. Et un vieil appareil photo. « Choisis ce que tu veux garder du monde. »",
+      "content": "Après un instant la femme aux yeux dorés apparait sous l'apparance mi-humaine, mi-kitsune. Elle tend un miroir et un vieil appareil photo. « Choisis ce que tu veux garder du monde. »",
       "image": "/images/chapters/chapitre9.png",
       "choices": [
-        {
-          "text": "Photographier le kitsune",
-          "next_chapter": 11
-        },
-        {
-          "text": "Photographier le sanctuaire",
-          "next_chapter": 12
-        }
+        { "text": "Choisi l'appareil photo et photographie le kitsune", "next_chapter": 11 },
+        { "text": "Choisi le miroir", "next_chapter": 12 }
       ]
     },
     {
@@ -144,33 +90,35 @@
       "content": "Tu fuis. Mais la neige efface les routes. La forêt tourne en rond. Une voix rieuse t’enveloppe.",
       "image": "/images/chapters/chapitre10.png",
       "choices": [
-        {
-          "text": "Appeler à l’aide",
-          "next_chapter": 13
-        },
-        {
-          "text": "Fermer les yeux et affronter la vérité",
-          "next_chapter": 9
-        }
+        { "text": "Appeler à l’aide", "next_chapter": 13 },
+        { "text": "Fermer les yeux et affronter la vérité", "next_chapter": 9 }
       ]
     },
     {
       "chapter_number": 11,
-      "image": "/images/chapters/chapitre11.png",
       "content": "Tu photographie le kitsune. Un flash, une douleur, puis... le néant. Tu n'as jamais existé.",
+      "image": "/images/chapters/chapitre11.png",
       "choices": []
     },
     {
       "chapter_number": 12,
+      "content": "Tu acceptes le miroir, puis une lumière te guide vers une clairière. Tu deviens l’un des siens et deviens gardien entre les mondes.",
       "image": "/images/chapters/chapitre12.png",
-      "content": "Tu photographie le sanctuaire. La photo devient virale. Mais toi seul sais que le kitsune veille encore, quelque part dans la neige.",
       "choices": []
     },
     {
       "chapter_number": 13,
-      "content": "Tu acceptes le miroir, puis une lumière te guide vers une clairière. Tu deviens l’un des siens et deviens gardien entre les mondes.",
+      "content": "Tu cries dans la neige. La forêt ne répond pas. Mais quelqu’un arrive. Ce n’est ni un esprit, ni un homme. Une silhouette encapuchonnée t’offre une lanterne. « Il est encore temps. Mais tu devras payer le prix de ton appel. » Un vieux rituel s’accomplit. Ta mémoire flanche. Tu quittes Shirakawa-go... mais tu ne te souviens plus de pourquoi tu étais venu.",
       "image": "/images/chapters/chapitre13.png",
       "choices": []
+    },
+    {
+      "chapter_number": 14,
+      "content": "Tu fais demi-tour. La vieille dame est encore là, immobile. Cette fois, c’est toi qui l’interpelles. « Vos paroles… elles m’ont troublé. Qu’est-ce qu’un kitsune ? » Elle sourit, comme si elle savait que tu reviendrais.",
+      "image": "/images/chapters/chapitre14.png",
+      "choices": [
+        { "text": "L’écouter attentivement", "next_chapter": 2 }
+      ]
     }
   ]
 }

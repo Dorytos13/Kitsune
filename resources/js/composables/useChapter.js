@@ -33,6 +33,19 @@ export function useChapter(story, storyId) {
       console.error('Erreur lors de la sauvegarde de la progression:', e)
     }
   }
+
+    // Fonction pour précharger les images des chapitres suivants
+    function preloadNextChapterImages() {
+      if (currentChapter.value && currentChapter.value.choices) {
+        currentChapter.value.choices.forEach(choice => {
+          const nextChapter = story.value.chapters.find(ch => ch.id === choice.next_chapter_id);
+          if (nextChapter && nextChapter.image) {
+            const img = new Image();
+            img.src = nextChapter.image;
+          }
+        });
+      }
+    }
   
   // Fonction pour initialiser le chapitre actuel
   function initChapter() {
@@ -63,6 +76,8 @@ export function useChapter(story, storyId) {
         if (chapterHistory.value.length === 0) {
           chapterHistory.value.push(targetChapter.id)
         }
+
+        preloadNextChapterImages();
       }
     }
   }
@@ -72,6 +87,7 @@ export function useChapter(story, storyId) {
     currentChapter.value = chapter
     chapterHistory.value.push(chapter.id)
     saveProgress()
+    preloadNextChapterImages();
   }
   
   // Faire un choix et passer au chapitre suivant
@@ -135,6 +151,7 @@ export function useChapter(story, storyId) {
     restartStory,
     goToPreviousChapter,
     isEndOfStory,
-    canGoBack
+    canGoBack,
+    preloadNextChapterImages
   }
 }

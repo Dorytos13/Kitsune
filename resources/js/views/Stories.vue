@@ -35,20 +35,12 @@ function showInfo() {
       </p>
       
       <div class="user-actions">
-        <template v-if="isAuthenticated">
           <BaseButton 
             variant="primary" 
             @click="showInfo"
             class="info-btn">
             En savoir plus sur le jeu
           </BaseButton>
-          <BaseButton 
-            variant="outline" 
-            @click="logout"
-            class="logout-btn">
-            Deconnexion
-          </BaseButton>
-        </template>
       </div>
     </div>
     
@@ -407,25 +399,6 @@ function showInfo() {
   .user-actions {
     flex-direction: column;
     width: 100%;
-  }
-}
-
-/* Version sombre */
-@media (prefers-color-scheme: dark) {
-  /* La plupart des styles sont maintenant gérés par les variables CSS */
-  .story-title::after {
-    background-color: var(--primary);
-  }
-  
-  /* Cas spécifiques non couverts par les variables */
-  .loading-spinner {
-    border-color: rgba(255, 138, 138, 0.2);
-    border-top-color: var(--primary);
-  }
-  
-  .info-btn {
-    background-color: rgba(255, 138, 138, 0.1);
-    border-color: rgba(255, 138, 138, 0.3);
   }
 }
 </style>

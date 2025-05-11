@@ -28,24 +28,20 @@ function showInfo() {
     <!-- Contenu à gauche -->
     <div class="content">
       <h2 class="welcome-text">DÉCOUVREZ</h2>
-      <h1 class="japan-title">Nos Histoires</h1>
+      <h1 class="japan-title">Les Histoires</h1>
       <p class="japan-description">
-        Choisissez parmi nos récits japonais mettant en scène les légendaires kitsune. 
-        Chaque histoire vous plongera dans un univers mystique où les frontières entre le monde des humains et celui des esprits s'estompent.
+        Vous retrouverez ici toutes les histoires disponibles sur Kitsune. Pour l'instant, plongez dans notre toute première histoire intitulée "Le Voyage de Kitsune".
       </p>
-      
-      <div class="user-actions">
           <BaseButton 
             variant="primary" 
             @click="showInfo"
             class="info-btn">
-            En savoir plus sur le jeu
+            En savoir plus
           </BaseButton>
-      </div>
     </div>
     
     <!-- Visualisation des histoires à droite -->
-    <div class="torii-illustration">
+    <div class="stories-list">
       <div v-if="loading" class="loading-container">
         <div class="loading-spinner"></div>
         <p>Chargement des histoires...</p>
@@ -69,7 +65,6 @@ function showInfo() {
           <div class="story-content">
             <h2 class="story-title">{{ story.title }}</h2>
             <p v-if="story.playable" class="story-summary">{{ story.summary }}</p>
-            <p v-else class="soon">En cours d'écriture...</p>
             <BaseButton 
               variant="primary" 
               @click="startReading" 
@@ -133,14 +128,7 @@ function showInfo() {
   font-family: var(--font-jp);
 }
 
-.user-actions {
-  display: flex;
-  gap: var(--space-md);
-  flex-wrap: wrap;
-  margin-top: var(--space-lg);
-}
-
-.torii-illustration {
+.stories-list {
   position: relative;
   width: 55%;
   height: 100vh;
@@ -157,37 +145,12 @@ function showInfo() {
   padding: var(--space-lg);
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: var(--space-lg);
   scrollbar-width: thin;
   scrollbar-color: var(--primary) rgba(124, 48, 70, 0.1);
   max-height: 80vh;
-}
-
-.stories-scroll::-webkit-scrollbar {
-  width: 6px;
-}
-
-.stories-scroll::-webkit-scrollbar-track {
-  background: rgba(124, 48, 70, 0.1);
-  border-radius: var(--radius-lg);
-}
-
-.stories-scroll::-webkit-scrollbar-thumb {
-  background-color: var(--primary);
-  border-radius: var(--radius-lg);
-}
-
-.story-card {
-  display: flex;
-  background-color: var(--bg-light);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: 0 5px 15px var(--shadow);
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-  cursor: pointer;
-  position: relative;
-  animation: fadeIn 0.5s ease forwards;
-  opacity: 0;
 }
 
 @keyframes fadeIn {
@@ -197,58 +160,12 @@ function showInfo() {
   }
 }
 
-.story-card:hover:not(.inactive) {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px var(--shadow);
-}
-
-.story-card.inactive {
-  opacity: 0.7;
-  cursor: default;
-  filter: grayscale(40%);
-}
-
-.story-tag {
-  position: absolute;
-  top: var(--space-md);
-  right: var(--space-md);
-  padding: 0.3rem 0.8rem;
-  background-color: var(--secondary-dark);
-  color: var(--text-light);
-  font-size: 0.8rem;
-  font-weight: 600;
-  border-radius: var(--radius-md);
-  z-index: 2;
-  box-shadow: 0 2px 8px var(--shadow);
-  font-family: var(--font-main);
-}
-
-.story-cover {
-  width: 35%;
-  height: auto;
-  object-fit: cover;
-  transition: transform var(--transition-slow);
-}
-
-.story-card:hover:not(.inactive) .story-cover {
-  transform: scale(1.05);
-}
-
 .story-content {
   padding: var(--space-lg);
   width: 65%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.story-title {
-  font-size: 1.4rem;
-  margin-bottom: var(--space-md);
-  color: var(--text-dark);
-  font-family: var(--font-display);
-  position: relative;
-  font-weight: 600;
 }
 
 .story-title::after {
@@ -262,62 +179,8 @@ function showInfo() {
   transition: width var(--transition-normal);
 }
 
-.story-card:hover:not(.inactive) .story-title::after {
-  width: 50%;
-}
-
-.story-summary {
-  color: var(--text-dark);
-  font-size: 0.95rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  line-height: 1.5;
-  font-family: var(--font-jp);
-}
-
-.soon {
-  font-style: italic;
-  color: var(--primary);
-  font-size: 0.9rem;
-  position: relative;
-  padding-left: 1.5rem;
-  font-family: var(--font-jp);
-}
-
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  gap: var(--space-lg);
-}
-
-.loading-spinner {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 3px solid rgba(124, 48, 70, 0.2);
-  border-top-color: var(--primary);
-  animation: spin 1s infinite linear;
-}
-
 .start-button {
   margin-top: var(--space-md);
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.loading-container p {
-  color: var(--text-dark);
-  font-family: var(--font-main);
-  font-size: 1.1rem;
 }
 
 .error-container {
@@ -349,7 +212,7 @@ function showInfo() {
     margin-bottom: var(--space-lg);
   }
   
-  .torii-illustration {
+  .stories-list {
     width: 90%;
     height: auto;
     min-height: 60vh;
@@ -361,18 +224,6 @@ function showInfo() {
     padding: var(--space-md);
   }
   
-  .story-card {
-    flex-direction: column;
-  }
-  
-  .story-cover {
-    width: 100%;
-    height: 180px;
-  }
-  
-  .story-content {
-    width: 100%;
-  }
   
   .japan-description {
     max-width: 100%;
@@ -380,10 +231,6 @@ function showInfo() {
   
   .japan-title {
     font-size: 3.5rem;
-  }
-  
-  .user-actions {
-    justify-content: center;
   }
 }
 
@@ -394,11 +241,6 @@ function showInfo() {
   
   .welcome-text {
     font-size: 1rem;
-  }
-  
-  .user-actions {
-    flex-direction: column;
-    width: 100%;
   }
 }
 </style>

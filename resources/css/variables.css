@@ -57,15 +57,3 @@
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
   }
-  
-  /* Dark mode variables */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --primary: #ff8a8a;
-      --primary-hover: #ffacac;
-      --bg-light: var(--bg-dark);
-      --text-dark: var(--text-light);
-      --border: var(--border-dark);
-      --shadow: var(--shadow-dark);
-    }
-  }

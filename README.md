@@ -3,9 +3,9 @@
 Kitsune est une fiction interactive inspirée du folklore japonais, où vous incarnez un voyageur découvrant les légendes autour des esprits-renards (kitsune). Vos choix influenceront votre parcours et détermineront votre destin dans le Japon rural empli de mystères et de magie.
 
 ## Fonctionnalités principales
-- [Système de choix : Chaque décision influence le déroulement de l'histoire]
-- [Sauvegarde de progression : Reprenez votre aventure là où vous l'avez laissée]
-- [Authentification : Créez un compte pour accéder à la page d'information "en savoir plus"]
+- Système de choix : Chaque décision influence le déroulement de l'histoire
+- Sauvegarde de progression : Reprenez votre aventure là où vous l'avez laissée
+- Authentification : Créez un compte pour accéder à la page d'information "en savoir plus"
 
 ## Installation
 
@@ -108,17 +108,17 @@ L'API est versionnées et préfixée avec /api/v1. Principales routes :
 [DELETE /api/v1/stories/{id}] - Supprime une histoire (authentification requise)
 
 ### Chapitres :
-[GET /api/v1/chapters/{id}] - Obtient les détails d'un chapitre et ses choix
-[POST /api/v1/chapters] - Crée un nouveau chapitre (authentification requise)
-[PUT /api/v1/chapters/{id}] - Met à jour un chapitre (authentification requise)
-[DELETE /api/v1/chapters/{id}] - Supprime un chapitre (authentification requise)
+- [GET /api/v1/chapters/{id}] - Obtient les détails d'un chapitre et ses choix
+- [POST /api/v1/chapters] - Crée un nouveau chapitre (authentification requise)
+- [PUT /api/v1/chapters/{id}] - Met à jour un chapitre (authentification requise)
+- [DELETE /api/v1/chapters/{id}] - Supprime un chapitre (authentification requise)
 
 ## Test rapide
 Pour tester rapidement les perties protégées par l'authentification avec des données de démonstrations voici ce qu'il faut faire :
 1. Installer le projet
 2. Utilisez les identifiants :
-    Email: user@exemple.com
-    Mot de passe: Password
+    - Email: user@exemple.com
+    - Mot de passe: Password
 
-
+## Auteur
 Projet Développé par Doriane Rosset, M52-1 Bachelor en Ingenierie des médias dans le cadre d'un projet commun entre les cours de WebMobUI (vue.js) et DevProdMed (Laravel)

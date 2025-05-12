@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import { fetchJson } from '@/utils/fetchJson.js'
 
 export function useAuth() {
   const user = ref(null)
@@ -15,17 +16,18 @@ export function useAuth() {
     }
     
     try {
-      const response = await fetch('/api/v1/profile', {
+      const { request } = fetchJson({
+        url: 'profile',
         headers: {
           'Authorization': `Bearer ${token.value}`
         }
       })
       
-      if (response.ok) {
-        const data = await response.json()
+      try {
+        const data = await request
         user.value = data
         isAuthenticated.value = true
-      } else {
+      } catch (err) {
         // Token invalide ou expiré
         logout()
       }
@@ -41,25 +43,18 @@ export function useAuth() {
     error.value = null
     
     try {
-      const response = await fetch('/api/v1/register', {
+      const { request } = fetchJson({
+        url: 'register',
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
+        data: {
           name,
           email,
           password,
           password_confirmation: passwordConfirmation
-        })
+        }
       })
       
-      const data = await response.json()
-      
-      if (!response.ok) {
-        throw new Error(data.message || 'Erreur lors de l\'inscription')
-      }
-      
+      const data = await request
       user.value = data.user
       token.value = data.token
       localStorage.setItem('token', data.token)
@@ -67,7 +62,7 @@ export function useAuth() {
       
       return true
     } catch (err) {
-      error.value = err.message
+      error.value = err.statusText || 'Erreur lors de l\'inscription'
       return false
     } finally {
       loading.value = false
@@ -78,25 +73,21 @@ export function useAuth() {
   const login = async (email, password) => {
     loading.value = true
     error.value = null
+
+      console.log('Tentative de connexion avec:', { email });
+
     
     try {
-      const response = await fetch('/api/v1/login', {
+      const { request } = fetchJson({
+        url: 'login',
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
+        data: {
           email,
           password
-        })
+        }
       })
       
-      const data = await response.json()
-      
-      if (!response.ok) {
-        throw new Error(data.message || 'Identifiants incorrects')
-      }
-      
+      const data = await request
       user.value = data.user
       token.value = data.token
       localStorage.setItem('token', data.token)
@@ -104,7 +95,7 @@ export function useAuth() {
       
       return true
     } catch (err) {
-      error.value = err.message
+      error.value = err.statusText || 'Identifiants incorrects'
       return false
     } finally {
       loading.value = false
@@ -115,12 +106,15 @@ export function useAuth() {
   const logout = async () => {
     if (token.value) {
       try {
-        await fetch('/api/v1/logout', {
+        const { request } = fetchJson({
+          url: 'logout',
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token.value}`
           }
         })
+        
+        await request
       } catch (err) {
         console.error('Erreur lors de la déconnexion', err)
       }

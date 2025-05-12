@@ -12,12 +12,12 @@ const router = useRouter()
 onMounted(async () => {
   // Rediriger si non authentifié
   if (!isAuthenticated.value) {
-    router.push('/login?redirect=/game-info')
+    router.push('api/v1/login')
     return
   }
   
   try {
-    const response = await fetch('/api/v1/game-info', {
+    const response = await fetch('api/v1/about', {
       headers: {
         'Authorization': `Bearer ${token.value}`
       }
@@ -65,15 +65,6 @@ onMounted(async () => {
         <ul>
           <li v-for="(instruction, index) in gameInfo.howToPlay" :key="index">
             {{ instruction }}
-          </li>
-        </ul>
-      </div>
-      
-      <div class="info-section">
-        <h2>Astuces</h2>
-        <ul>
-          <li v-for="(tip, index) in gameInfo.tips" :key="index">
-            {{ tip }}
           </li>
         </ul>
       </div>

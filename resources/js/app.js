@@ -6,7 +6,7 @@ import router from './router';
 import '../css/variables.css'
 import '../css/custom-theme.css'
 
-setDefaultBaseUrl('http://127.0.0.1:8000/api')
+setDefaultBaseUrl('http://localhost:8000/api')
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') ?? '';
 console.log('CSRF Token:', csrfToken);

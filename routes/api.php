@@ -25,7 +25,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/profile', [AuthController::class, 'profile']);
         
         // Page d'information sur le jeu (protégée)
-        Route::get('/game-info', [GameInfoController::class, 'getGameInfo']);
+        Route::get('/about', [GameInfoController::class, 'getGameInfo']);
         
         // Routes d'administration
         Route::post('/stories', [StoryController::class, 'createNewStory']);

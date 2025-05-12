@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
     ],
+    // Ajoutez cette configuration pour Sanctum
+    'sanctum' => [
+        'driver' => 'sanctum',
+        'provider' => 'users',
+    ],
 
     /*
     |--------------------------------------------------------------------------

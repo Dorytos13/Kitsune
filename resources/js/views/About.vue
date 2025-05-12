@@ -81,11 +81,11 @@ onMounted(async () => {
 
 <style scoped>
 .game-info-page {
-  background: #22092c;
-  color: white;
+  background: var(--bg-light);
+  color: var(--text-light);
   padding: 2rem;
   min-height: 100vh;
-  font-family: 'VT323', monospace;
+  font-family: var(--font-family-monospace);
 }
 
 .loading, .error {
@@ -95,19 +95,20 @@ onMounted(async () => {
 }
 
 .error {
-  color: #ff6b6b;
+  color: var(--error-color);
 }
 
 .info-container {
   max-width: 800px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2rem;
-  border-radius: 10px;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-light);
+  padding: 4rem;
+  border-radius: var(--radius-xl);
 }
 
 .title {
+  color: var(--accent);
   font-size: 2.5rem;
   margin-bottom: 1rem;
   text-align: center;
@@ -124,7 +125,7 @@ onMounted(async () => {
 .info-section {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-light);
 }
 
 .info-section:last-child {
@@ -134,7 +135,7 @@ onMounted(async () => {
 .info-section h2 {
   font-size: 1.8rem;
   margin-bottom: 1rem;
-  color: #bc6ff1;
+  color: var(--primary-color);
 }
 
 .info-section p, .info-section li {
@@ -142,12 +143,6 @@ onMounted(async () => {
   margin-bottom: 0.5rem;
 }
 
-.metadata {
-  margin-top: 1rem;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-}
 
 @media (max-width: 768px) {
   .game-info-page {

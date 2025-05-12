@@ -21,7 +21,7 @@ class GameInfoController extends Controller
             'howToPlay' => [
                 'Lisez attentivement chaque passage de l\'histoire',
                 'Faites vos choix en fonction de ce que vous pensez être la meilleure action',
-                'Votre progression est automatiquement dans votre LocalStorage sans même avoir besoin de connection'
+                'Votre progression est automatiquement dans votre LocalStorage sans même avoir besoin de connexion'
             ],
             'about' => 'Ce jeu a été développé dans le cadre d\'un projet commun entre deux cours de mon bachelor en Ingénierie des Médias.',
         ]);

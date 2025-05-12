@@ -108,17 +108,11 @@ function handleImageError(event) {
           <!-- Fin de l'histoire -->
           <div v-if="isEndOfStory" class="story-end">
             <p class="end-message">Fin de l'histoire</p>
-            <p class="author-note">Histoire écrite par {{ story.author }}</p>
             <div class="end-actions">
               <BaseButton 
                 variant="primary" 
                 @click="restartStory">
                 Recommencer l'aventure
-              </BaseButton>
-              <BaseButton 
-                variant="outline" 
-                @click="backToStories">
-                Découvrir d'autres histoires
               </BaseButton>
             </div>
           </div>

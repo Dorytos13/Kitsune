@@ -60,6 +60,12 @@ Les images des chapitres sont stockées dans le dossier public. Pour les rendre 
 ```bash
     [php artisan storage:link]
    ```
+
+## Authentification
+Utilisation de Laravel Sanctum pour l'authentification API par tokens
+- [POST /api/v1/register] - Inscription d'un nouvel utilisateur
+- [POST /api/v1/login] - Connexion d'un utilisateur
+
 ## Structure du projet
 ### Backend (Laravel) 
 1. Modèles :
@@ -99,10 +105,11 @@ Fonctions communes dans /utils
 
 ## API RESTful
 L'API est versionnées et préfixée avec /api/v1. Principales routes :
-
+S
 ### Histoires :
 [GET /api/v1/stories] - Liste toutes les histoires
 [GET /api/v1/stories/{id}] - Obtenir les détails d'une histoire et ses chapitres
+[GET /api/v1/about] - Informations sur le jeux (authentification requise)
 [POST /api/v1/stories] - Crée une nouvelle histoire (authentification requise)
 [PUT /api/v1/stories/{id}] - Met à jour une histoire (authentification requise)
 [DELETE /api/v1/stories/{id}] - Supprime une histoire (authentification requise)

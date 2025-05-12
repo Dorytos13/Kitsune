@@ -8,32 +8,31 @@ use App\Http\Requests\UpdateChoiceRequest;
 use Illuminate\Http\JsonResponse;
 
 class ChoiceController extends Controller
-{
-    public function getChoices(): JsonResponse
+{public function index(): JsonResponse
     {
         $choices = Choice::with(['chapter', 'nextChapter'])->get();
         return response()->json($choices);
     }
-
-    public function getChoice(Choice $choice): JsonResponse
-    {
-        $choice->load(['chapter', 'nextChapter']); 
-        return response()->json($choice);
-    }
-
-    public function createNewChoice(StoreChoiceRequest $request): JsonResponse
+    
+    public function store(StoreChoiceRequest $request): JsonResponse
     {
         $choice = Choice::create($request->validated());
         return response()->json($choice, 201);
     }
-
-    public function updateChoice(UpdateChoiceRequest $request, Choice $choice): JsonResponse
+    
+    public function show(Choice $choice): JsonResponse
+    {
+        $choice->load(['chapter', 'nextChapter']); 
+        return response()->json($choice);
+    }
+    
+    public function update(UpdateChoiceRequest $request, Choice $choice): JsonResponse
     {
         $choice->update($request->validated());
         return response()->json($choice);
     }
-
-    public function destroyChoice(Choice $choice): JsonResponse
+    
+    public function destroy(Choice $choice): JsonResponse
     {
         $choice->delete();
         return response()->json(['message' => 'Choice deleted successfully']);

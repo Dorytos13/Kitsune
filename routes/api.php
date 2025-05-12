@@ -11,35 +11,24 @@ Route::prefix('v1')->group(function () {
     // Routes d'authentification (publiques)
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/stories', [StoryController::class, 'index']);
+    Route::get('/stories/{story}', [StoryController::class, 'show']);
+    Route::get('/chapters/{chapter}', [ChapterController::class, 'show']);
+    Route::get('/choices/{choice}', [ChoiceController::class, 'show']);
+
 
     // Routes publiques
-    Route::get('/stories', [StoryController::class, 'indexStory']);
-    Route::get('/stories/{story}', [StoryController::class, 'showStory']);
-    Route::get('/chapters/{chapter}', [ChapterController::class, 'getChapter']);
-    Route::get('/choices', [ChoiceController::class, 'getChoices']);
+    Route::get('/about', [GameInfoController::class, 'getGameInfo']);
 
     // Routes protégées (nécessitent authentification)
     Route::middleware('auth:sanctum')->group(function () {
-        // Route de déconnexion
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::get('/profile', [AuthController::class, 'profile']);
-        
-        // Page d'information sur le jeu (protégée)
-        Route::get('/about', [GameInfoController::class, 'getGameInfo']);
-        
-        // Routes d'administration
-        Route::post('/stories', [StoryController::class, 'createNewStory']);
-        Route::put('/stories/{story}', [StoryController::class, 'updateStory']);
-        Route::delete('/stories/{story}', [StoryController::class, 'destroyStory']);
-        
-        Route::get('/chapters', [ChapterController::class, 'getChapters']);
-        Route::post('/chapters', [ChapterController::class, 'createNewChapter']);
-        Route::put('/chapters/{chapter}', [ChapterController::class, 'updateChapter']);
-        Route::delete('/chapters/{chapter}', [ChapterController::class, 'destroyChapter']);
-        
-        Route::get('/choices/{choice}', [ChoiceController::class, 'getChoice']);
-        Route::post('/choices', [ChoiceController::class, 'createNewChoice']);
-        Route::put('/choices/{choice}', [ChoiceController::class, 'updateChoice']);
-        Route::delete('/choices/{choice}', [ChoiceController::class, 'destroyChoice']);
+
+        // Routes CRUD pour les ressources
+        Route::apiResource('stories', StoryController::class)->except(['index', 'show']);
+        Route::apiResource('chapters', ChapterController::class)->except(['index', 'show']);
+        Route::apiResource('choices', ChoiceController::class)->except(['index', 'show']);
+
     });
 });

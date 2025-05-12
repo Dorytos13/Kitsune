@@ -1,7 +1,6 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
 import { useFetchJson } from '@/composables/useFetchJson'
-import { useAuth } from '@/composables/Auth.js'
 import { useChapter } from '@/composables/useChapter.js'
 
 const route = useRoute()

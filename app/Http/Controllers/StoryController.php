@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 
 class StoryController extends Controller
 {
-    public function indexStory(): JsonResponse
+    public function index(): JsonResponse
     {
         $stories = Story::all()->map(function ($story) {
             return [
@@ -18,14 +18,14 @@ class StoryController extends Controller
                 'summary' => $story->summary,
                 'author' => $story->author,
                 'cover' => $story->cover,
-                'playable' => $story->summary !== null && $story->summary !== ''
+                'playable' => empty($story->summary),
             ];
         });
 
-        return response()->json($stories);
+        return response()->json($stories, 200, ['Content-Type' => 'application/json']);
     }
 
-    public function showStory(Story $story): JsonResponse
+    public function show(Story $story): JsonResponse
     {
         // Charger les chapitres avec leurs choix pour un rendu optimal
         $story->load(['chapters' => function($query) {
@@ -35,19 +35,14 @@ class StoryController extends Controller
         return response()->json($story);
         }
 
-    public function createNewStory(StoreStoryRequest $request): JsonResponse
-    {
-        $story = Story::create($request->validated());
-        return response()->json($story, 201);
-    }
 
-    public function updateStory(UpdateStoryRequest $request, Story $story): JsonResponse
+    public function update(UpdateStoryRequest $request, Story $story): JsonResponse
     {
         $story->update($request->validated());
         return response()->json($story);
     }
 
-    public function destroyStory(Story $story): JsonResponse
+    public function destroy(Story $story): JsonResponse
     {
         $story->delete();
         return response()->json(['message' => 'Story deleted successfully']);

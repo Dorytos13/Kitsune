@@ -9,52 +9,33 @@ use Illuminate\Http\JsonResponse;
 
 class ChapterController extends Controller
 {
-    /**
-     * Afficher la liste des chapitres
-     */
-    public function getChapters(): JsonResponse
-    {
-        $chapters = Chapter::with(['story', 'choices'])->get();
-        return response()->json($chapters);
-    }
+    public function index(): JsonResponse
+{
+    $chapters = Chapter::with(['story', 'choices'])->get();
+    return response()->json($chapters);
+}
 
-    /**
-     * Afficher un chapitre spécifique
-     */
-    public function getChapter(Chapter $chapter): JsonResponse
-    {
-        $chapter->load(['story', 'choices']);
-        
-        return response()->json([
-            'chapter' => $chapter,
-            'has_choices' => $chapter->choices->isNotEmpty(),
-        ]);
-    }
+public function store(StoreChapterRequest $request): JsonResponse
+{
+    $chapter = Chapter::create($request->validated());
+    return response()->json($chapter, 201);
+}
 
-    /**
-     * Créer un nouveau chapitre
-     */
-    public function createNewChapter(StoreChapterRequest $request): JsonResponse
-    {
-        $chapter = Chapter::create($request->validated());
-        return response()->json($chapter, 201);
-    }
+public function show(Chapter $chapter): JsonResponse
+{
+    $chapter->load(['story', 'choices']);
+    return response()->json($chapter);
+}
 
-    /**
-     * Mettre à jour un chapitre existant
-     */
-    public function updateChapter(UpdateChapterRequest $request, Chapter $chapter): JsonResponse
-    {
-        $chapter->update($request->validated());
-        return response()->json($chapter);
-    }
+public function update(UpdateChapterRequest $request, Chapter $chapter): JsonResponse
+{
+    $chapter->update($request->validated());
+    return response()->json($chapter);
+}
 
-    /**
-     * Supprimer un chapitre
-     */
-    public function destroyChapter(Chapter $chapter): JsonResponse
-    {
-        $chapter->delete();
-        return response()->json(['message' => 'Chapter deleted successfully']);
-    }
+public function destroy(Chapter $chapter): JsonResponse
+{
+    $chapter->delete();
+    return response()->json(['message' => 'Chapter deleted successfully']);
+}   
 }

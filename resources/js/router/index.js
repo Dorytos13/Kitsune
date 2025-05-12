@@ -21,7 +21,7 @@ const routes = [
         path: '/story/:id',
         name: 'Story',
         component: Story,
-        meta: { requiresAuth: false } 
+        props : true
     },
     {
         path: '/login',

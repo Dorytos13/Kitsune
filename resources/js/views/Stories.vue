@@ -14,8 +14,8 @@ function openStory(story) {
   router.push(`/story/${story.id}`)
 }
 
-function startReading() {
-  router.push(`/stories/${story.id}`);
+function startReading(story) {
+  router.push(`/story/${story.id}`);
 }
 
 function showInfo() {
@@ -76,14 +76,14 @@ function handleLogout() {
           :style="{ 'animation-delay': `${0.1 * (index + 1)}s` }"
           @click="openStory(story)"
         >
-          <div v-if="story.playable" class="story-tag">Disponible</div>
+          <div class="story-tag">Disponible</div>
           <img :src="story.cover" class="story-cover" alt="Couverture de l'histoire" />
           <div class="story-content">
             <h2 class="story-title">{{ story.title }}</h2>
-            <p v-if="story.playable" class="story-summary">{{ story.summary }}</p>
+            <p class="story-summary">{{ story.summary }}</p>
             <BaseButton 
               variant="primary" 
-              @click="startReading" 
+              @click="startReading(story)" 
               class="start-button">
               Commencer la lecture
             </BaseButton>

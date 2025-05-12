@@ -12,6 +12,10 @@ class AuthController extends Controller
 {
     /**
      * Inscription d'un nouvel utilisateur
+     * @param Request $request
+     * @return JsonResponse
+     * @throws ValidationException
+     * @throws \Exception
      */
     public function register(Request $request): JsonResponse
     {
@@ -37,6 +41,10 @@ class AuthController extends Controller
 
     /**
      * Connexion d'un utilisateur
+     * @param Request $request
+     * @return JsonResponse
+     * @throws ValidationException
+     * @throws \Exception
      */
     public function login(Request $request): JsonResponse
     {
@@ -48,9 +56,9 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['Les identifiants fournis sont incorrects.'],
-            ]);
+            return response()->json([
+                'error' => 'Les identifiants fournis sont incorrects.'
+            ], 401);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
@@ -58,24 +66,45 @@ class AuthController extends Controller
         return response()->json([
             'user' => $user,
             'token' => $token
-        ]);
+        ], 200);
     }
 
     /**
      * Déconnexion d'un utilisateur
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     * @throws ValidationException
      */
     public function logout(Request $request): JsonResponse
     {
+        if (!$request->user()) {
+            return response()->json([
+                'error' => 'Aucun utilisateur connecté.'
+            ], 401);
+        }
         $request->user()->currentAccessToken()->delete();
 
-        return response()->json(['message' => 'Déconnexion réussie']);
+        return response()->json(['message' => 'Déconnexion réussie'], 200);
     }
+
+    
     
     /**
      * Récupérer le profil de l'utilisateur connecté
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     * @throws ValidationException
      */
     public function profile(Request $request): JsonResponse
     {
-        return response()->json($request->user());
+        if (!$request->user()) {
+            return response()->json([
+                'error' => 'Utilisateur non authentifié.'
+            ], 401); 
+        }
+
+        return response()->json($request->user(), 200);
     }
 }

@@ -11,13 +11,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User de test
-        User::factory()->create([
+        $user = User::factory()->create([
             'name' => 'User',
-            'email' => 'user@example.com',
-            'password' => bcrypt('password'),
+            'email' => 'user@exemple.com',
+            'password' => bcrypt('Password'),
         ]);
         
-        // Ajout de votre StorySeeder
+        // Ajout duStorySeeder
         $this->call([
             StorySeeder::class,
         ]);

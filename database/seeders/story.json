@@ -78,7 +78,7 @@
     },
     {
       "chapter_number": 9,
-      "content": "Après un instant la femme aux yeux dorés apparait sous l'apparance mi-humaine, mi-kitsune. Elle tend un miroir et un vieil appareil photo. « Choisis ce que tu veux garder du monde. »",
+      "content": "Après un instant une femme aux yeux dorés apparait sous l'apparance mi-humaine, mi-kitsune. Elle tend un miroir et un vieil appareil photo. « Choisis ce que tu veux garder du monde. »",
       "image": "/images/chapters/chapitre9.png",
       "choices": [
         { "text": "Choisi l'appareil photo et photographie le kitsune", "next_chapter": 11 },
@@ -91,7 +91,7 @@
       "image": "/images/chapters/chapitre10.png",
       "choices": [
         { "text": "Appeler à l’aide", "next_chapter": 13 },
-        { "text": "Fermer les yeux et affronter la vérité", "next_chapter": 9 }
+        { "text": "Fermer les yeux et affronter la vérité en retournant au sanctuaire", "next_chapter": 9 }
       ]
     },
     {

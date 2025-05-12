@@ -21,6 +21,11 @@ function startReading() {
 function showInfo() {
   router.push('/about')
 }
+
+function handleLogout() {
+  logout();
+  router.push('/');
+}
 </script>
 
 <template>
@@ -32,12 +37,23 @@ function showInfo() {
       <p class="japan-description">
         Vous retrouverez ici toutes les histoires disponibles sur Kitsune. Pour l'instant, plongez dans notre toute première histoire intitulée "Le Voyage de Kitsune".
       </p>
-          <BaseButton 
-            variant="primary" 
-            @click="showInfo"
-            class="info-btn">
-            En savoir plus
-          </BaseButton>
+      <div class="action-buttons">
+        <BaseButton 
+          variant="primary" 
+          @click="showInfo"
+          class="info-btn">
+          En savoir plus
+        </BaseButton>
+        
+        <!-- Bouton de déconnexion qui n'apparaît que si l'utilisateur est connecté -->
+        <BaseButton 
+          v-if="isAuthenticated" 
+          variant="outline" 
+          @click="handleLogout"
+          class="logout-btn">
+          Se déconnecter
+        </BaseButton>
+      </div>
     </div>
     
     <!-- Visualisation des histoires à droite -->
@@ -135,6 +151,13 @@ function showInfo() {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 /* Conteneur pour le scroll des histoires */

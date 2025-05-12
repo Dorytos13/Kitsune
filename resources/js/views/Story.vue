@@ -8,7 +8,6 @@ const route = useRoute()
 const router = useRouter()
 const storyId = route.params.id
 
-const { isAuthenticated } = useAuth()
 const { data: story, error, loading } = useFetchJson(`/stories/${storyId}`)
 
 // Utiliser le composable pour gérer les chapitres

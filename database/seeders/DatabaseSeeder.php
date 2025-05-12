@@ -12,9 +12,9 @@ class DatabaseSeeder extends Seeder
     {
         // User de test
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => bcrypt('password'), // Ajout du mot de passe
+            'name' => 'User',
+            'email' => 'user@example.com',
+            'password' => bcrypt('password'),
         ]);
         
         // Ajout de votre StorySeeder

@@ -14,6 +14,11 @@ class Choice extends Model
         return $this->belongsTo(Chapter::class);
     }
 
+    /**
+     * Get the next chapter for the current choice.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function nextChapter(): BelongsTo
     {
         return $this->belongsTo(Chapter::class, 'next_chapter_id');

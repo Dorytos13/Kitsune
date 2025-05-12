@@ -22,7 +22,7 @@ class StorySeeder extends Seeder
             'cover' => $storyData['cover'] ?? null, 
         ]);
 
-        $chapterIdMap = [];
+        $chapterIdMap = []; // Tableau pour stocker les ID des chapitres créés
 
         // Première passe: créer tous les chapitres
         foreach ($storyData['chapters'] as $chapter) {

@@ -1,4 +1,3 @@
-<!-- filepath: c:\Users\dodir\Documents\DevProdMed\WebMobUI52-kitsune\resources\js\components\TheHeader.vue -->
 <script setup>
 import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'

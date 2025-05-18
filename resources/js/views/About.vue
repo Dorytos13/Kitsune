@@ -3,20 +3,24 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '@/composables/Auth.js'
 
+// Déclaration des états réactifs pour les données du jeu, le chargement et les erreurs
 const gameInfo = ref(null)
 const loading = ref(true)
 const error = ref(null)
+
+// Récupération de l'état d'authentification et du token via un composable
 const { isAuthenticated, token } = useAuth()
 const router = useRouter()
 
 onMounted(async () => {
-  // Rediriger si non authentifié
+    // Redirige vers la page de login si l'utilisateur n'est pas authentifié
   if (!isAuthenticated.value) {
     router.push('api/v1/login')
     return
   }
   
   try {
+    // récupère les informations du jeu depuis l'API
     const response = await fetch('api/v1/about', {
       headers: {
         'Authorization': `Bearer ${token.value}`
@@ -27,10 +31,11 @@ onMounted(async () => {
       throw new Error('Vous devez être connecté pour accéder à ces informations')
     }
     
+    // stockage des données reçues
     gameInfo.value = await response.json()
   } catch (err) {
     error.value = err.message
-  } finally {
+  } finally { //fin du chargemetn dans tous les cas
     loading.value = false
   }
 })
@@ -38,14 +43,17 @@ onMounted(async () => {
 
 <template>
   <div class="game-info-page">
+    <!-- Affiche du chargement -->
     <div v-if="loading" class="loading">
       Chargement des informations du jeu...
     </div>
     
+    <!-- Affiche une erreur si elle se produit -->
     <div v-else-if="error" class="error">
       {{ error }}
     </div>
     
+    <!--information du jeu -->
     <div v-else-if="gameInfo" class="info-container">
       <h1 class="title">{{ gameInfo.title }}</h1>
       <p class="description">{{ gameInfo.description }}</p>
@@ -69,6 +77,7 @@ onMounted(async () => {
         </ul>
       </div>
       
+      <!--bouton pour revenir aux histoires -->
       <BaseButton 
         variant="primary" 
         @click="router.push('/stories')"
@@ -80,6 +89,7 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+/* Style de la page d'informations du jeu */
 .game-info-page {
   background: var(--bg-light);
   color: var(--text-light);

@@ -1,11 +1,20 @@
 <template>
+  <!--
+    Page d'accueil de l'application Kitsune :
+    - Affiche un message de bienvenue et une description immersive sur les légendes japonaises.
+    - Utilise le composant BaseButton pour naviguer vers la page des histoires.
+    - Affiche une illustration.
+    - Mise en page responsive avec deux sections principales : texte et illustration.
+  -->
   <div class="japan-container">
     <div class="content">
+      <!-- Texte d'accueil -->
       <h2 class="welcome-text">BIENVENUE DANS</h2>
       <h1 class="japan-title">KITSUNE</h1>
       <p class="japan-description">
         Plongez dans l'univers magique des légendes japonaises, où les kitsune - renards mystiques aux pouvoirs surnaturels - vous guideront à travers des récits ancestraux dans un cadre visuel inspiré du Japon traditionnel.
       </p>
+      <!-- Bouton pour accéder aux histoires -->
       <BaseButton 
         variant="primary" 
         @click="$router.push('/stories')"
@@ -13,7 +22,7 @@
         Découvrir les histoires
       </BaseButton>
     </div>
-    
+    <!-- Illustration du torii -->
     <div class="torii-illustration">
       <div class="torii-image-container">
         <img src="/images/covers/Tori.jpg" alt="Torii japonais" class="torii-image" />
@@ -23,10 +32,11 @@
 </template>
 
 <script setup>
-// rien à faire ici pour l'instant
+// rien à faire ici, uniquement du HTML et du CSS
 </script>
 
 <style scoped>
+/* Style de la page d'accueil */
 .japan-container {
   min-height: 100vh;
   width: 100%;
@@ -128,9 +138,6 @@
 .torii-image:hover {
   transform: translateY(-30px);
 }
-
-
-
 
 /* Ajout d'un nuage stylisé */
 .japan-container::before {

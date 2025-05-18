@@ -3,10 +3,12 @@ import { useRoute, useRouter } from 'vue-router'
 import { useFetchJson } from '@/composables/useFetchJson'
 import { useChapter } from '@/composables/useChapter.js'
 
+// Récupération de l'ID de l'histoire depuis l'URL
 const route = useRoute()
 const router = useRouter()
 const storyId = route.params.id
 
+// Récupération des données de l'histoire depuis l'API
 const { data: story, error, loading } = useFetchJson(`/stories/${storyId}`)
 
 // Utiliser le composable pour gérer les chapitres
@@ -24,7 +26,7 @@ function backToStories() {
   router.push('/stories')
 }
 
-// Gérer les erreurs de chargement d'image
+// Gére les erreurs de chargement d'image
 function handleImageError(event) {
   console.error(`Erreur de chargement de l'image: ${event.target.src}`);
 }
@@ -32,7 +34,7 @@ function handleImageError(event) {
 
 <template>
   <div class="japan-container story-view">
-    <!-- Éléments décoratifs japonais -->
+    <!-- Éléments décoratifs -->
     <div class="cloud-decoration cloud-1"></div>
     <div class="cloud-decoration cloud-2"></div>
     <div class="cherry-branch"></div>
@@ -42,7 +44,8 @@ function handleImageError(event) {
       <div class="loading-spinner"></div>
       <p>Chargement de l'histoire...</p>
     </div>
-    
+
+    <!-- État d'erreur -->
     <div v-else-if="error" class="error-container">
       <h2>Une erreur est survenue</h2>
       <p>{{ error }}</p>
@@ -51,6 +54,7 @@ function handleImageError(event) {
       </BaseButton>
     </div>
     
+    <!-- Contenu principal de l'histoire -->
     <div v-else-if="story && currentChapter" class="story-content">
       <!-- En-tête de l'histoire -->
       <div class="story-header">
@@ -121,6 +125,7 @@ function handleImageError(event) {
 </template>
 
 <style scoped>
+/* Style de la page d'histoire */
 .japan-container.story-view {
   min-height: 100vh;
   width: 100%;

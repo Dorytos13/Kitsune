@@ -1,27 +1,31 @@
-<!-- filepath: c:\Users\dodir\Documents\DevProdMed\KITSUNE\Kitsune\resources\js\views\Stories.vue -->
 <script setup>
 import { useFetchJson } from '@/composables/useFetchJson'
 import { useRouter } from 'vue-router'
 import { useAuth } from '@/composables/Auth.js'
 
 const { data: stories, error, loading } = useFetchJson('/stories')
-const router = useRouter()
-const { isAuthenticated, user, logout } = useAuth()
-defineProps(['story']);
 
+const router = useRouter()
+const { isAuthenticated, logout } = useAuth()
+
+// Fonction pour ouvrir une histoire
+// Si l'histoire n'est pas jouable, on ne fait rien
 function openStory(story) {
   if (!story.playable) return
   router.push(`/story/${story.id}`)
 }
 
+// Fonction pour démarrer la lecture d'une histoire
 function startReading(story) {
   router.push(`/story/${story.id}`);
 }
 
+// afficher les infos sur le jeu
 function showInfo() {
   router.push('/about')
 }
 
+// Fonction pour gérer la déconnexion
 function handleLogout() {
   logout();
   router.push('/');
@@ -30,7 +34,7 @@ function handleLogout() {
 
 <template>
   <div class="japan-container">
-    <!-- Contenu à gauche -->
+    <!-- Contenu à gauche : présentation-->
     <div class="content">
       <h2 class="welcome-text">DÉCOUVREZ</h2>
       <h1 class="japan-title">Les Histoires</h1>
@@ -38,6 +42,7 @@ function handleLogout() {
         Vous retrouverez ici toutes les histoires disponibles sur Kitsune. Pour l'instant, plongez dans notre toute première histoire intitulée "Le Voyage de Kitsune".
       </p>
       <div class="action-buttons">
+        <!-- Bouton pour accéder à la page info -->
         <BaseButton 
           variant="primary" 
           @click="showInfo"
@@ -67,6 +72,7 @@ function handleLogout() {
         <p>{{ error }}</p>
       </div>
       
+      <!-- Liste des histoires -->
       <div v-else class="stories-scroll">
         <div
           v-for="(story, index) in stories"
@@ -96,6 +102,7 @@ function handleLogout() {
 </template>
 
 <style scoped>
+/* Style de la page de stories */
 .japan-container {
   min-height: 100vh;
   width: 100%;

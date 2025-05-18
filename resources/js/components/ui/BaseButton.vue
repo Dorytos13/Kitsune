@@ -1,4 +1,11 @@
 <template>
+    <!--
+      Bouton personnalisable :
+      - Applique des classes selon la variante (primary, outline, secondary)
+      - Affiche un indicateur de chargement si loading est true
+      - Désactive le bouton si disabled ou loading est true
+      - Émet un événement 'click' lors du clic
+    -->
     <button 
       :class="[
         'base-button', 
@@ -9,12 +16,19 @@
       @click="$emit('click')"
       :type="type"
     >
+    <!-- Indicateur de chargement (spinner) -->
       <span v-if="loading" class="loading-indicator"></span>
+      <!-- Contenu du bouton (slot) -->
       <slot></slot>
     </button>
   </template>
   
   <script setup>
+  // Définition des props du composant :
+  // - variant : style du bouton ('primary', 'outline', 'secondary')
+  // - loading : affiche un spinner et désactive le bouton si true
+  // - disabled : désactive le bouton si true
+  // - type : type HTML du bouton ('button', 'submit', 'reset')
   defineProps({
     variant: {
       type: String,
@@ -35,11 +49,13 @@
       validator: (value) => ['button', 'submit', 'reset'].includes(value)
     }
   })
-  
+
+  // Déclaration de l'événement 'click' émis par le bouton
   defineEmits(['click'])
   </script>
   
   <style scoped>
+  /* Style de base du bouton */
   .base-button {
     display: inline-block;
     padding: 0.8rem 2rem;
@@ -119,6 +135,7 @@
     box-shadow: none !important;
   }
   
+  /* Animation du spinner */
   @keyframes spin {
     to { transform: rotate(360deg); }
   }

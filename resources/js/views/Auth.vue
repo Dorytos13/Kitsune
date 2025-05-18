@@ -1,15 +1,16 @@
-<!-- filepath: c:\Users\dodir\Documents\DevProdMed\WebMobUI52-kitsune\resources\js\views\Auth.vue -->
 <script setup>
 import { ref, computed } from 'vue'
 import { useAuth } from '@/composables/Auth.js'
 import { useRoute, useRouter } from 'vue-router'
 
+//redirection après connexion/inscription
 const route = useRoute()
 const router = useRouter()
-const redirectPath = computed(() => route.query.redirect || '/stories')
+const redirectPath = computed(() => route.query.redirect || '/about')
 
 const { register, login, error: authError, loading } = useAuth()
 
+// États réactifs pour le formulaire et la gestion du mode (connexion/inscription)
 const mode = ref('login') // 'login' ou 'register'
 const name = ref('')
 const email = ref('')
@@ -17,18 +18,22 @@ const password = ref('')
 const passwordConfirmation = ref('')
 const error = ref('')
 
+// fonction pour changer entre le mode connexion et inscription
 const toggleMode = () => {
   mode.value = mode.value === 'login' ? 'register' : 'login'
   error.value = ''
 }
 
+// Fonction pour gérer la soumission du formulaire
 const handleSubmit = async () => {
   error.value = ''
   let success = false
   
   if (mode.value === 'login') {
+    // Connexion
     success = await login(email.value, password.value)
   } else {
+    // Inscription
     if (password.value !== passwordConfirmation.value) {
       error.value = 'Les mots de passe ne correspondent pas'
       return
@@ -40,7 +45,9 @@ const handleSubmit = async () => {
       passwordConfirmation.value
     )
   }
-  
+  // Redirection après connexion ou inscription
+  // Si la connexion ou l'inscription réussit, redirige vers la page about
+  // Sinon, affiche l'erreur
   if (success) {
     router.push(redirectPath.value)
   } else if (authError.value) {
@@ -125,6 +132,7 @@ const handleSubmit = async () => {
 
 
 <style scoped>
+/* Style de la page d'authentification */
 .auth-page {
   min-height: 100vh;
   display: flex;
@@ -136,7 +144,6 @@ const handleSubmit = async () => {
   padding: 2rem;
 }
 
-/* Motif japonais en arrière-plan */
 .auth-page::before {
   content: '';
   position: absolute;
